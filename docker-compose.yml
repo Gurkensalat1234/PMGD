@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  db:
+    ports:
+      - '5432:5432'
+    image: postgres
+    environment:
+      POSTGRES_USER: 'PMGD'
+      POSTGRES_PASSWORD: 'PMGD'
+      POSTGRES_DB: 'PMGD'
+    volumes:
+      - './database:/var/lib/postgresql/data'
