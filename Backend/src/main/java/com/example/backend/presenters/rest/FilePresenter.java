@@ -1,16 +1,18 @@
 package com.example.backend.presenters.rest;
 
-import com.example.backend.general.Constants;
+import com.example.backend.general.HttpConstants;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
-@RequestMapping(Constants.REST_API_FILE_ENDPOINT)
+@RequestMapping(HttpConstants.REST_API_FILE_ENDPOINT)
 public interface FilePresenter {
 
     @PostMapping(
@@ -18,10 +20,17 @@ public interface FilePresenter {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    ResponseEntity<String> uploadFile(HttpServletRequest httpServletRequest);
+    ResponseEntity<String> upload(HttpServletRequest httpServletRequest) throws IOException;
 
     @GetMapping(
-            value = "/test"
+            value = "/get/{fileId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    ResponseEntity<String> test();
+    ResponseEntity<StreamingResponseBody> get(String fileId);
+
+    @DeleteMapping(
+            value = "/delete/{fileId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    void delete(String fileId);
 }

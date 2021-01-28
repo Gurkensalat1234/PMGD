@@ -1,7 +1,6 @@
 package com.example.backend.security;
 
-import com.example.backend.general.Constants;
-import org.springframework.beans.factory.annotation.Value;
+import com.example.backend.general.HttpConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -52,8 +51,8 @@ public class BackendSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(Constants.REST_API_BASE_URL + "/test").permitAll()
-                .antMatchers(Constants.REST_API_FILE_ENDPOINT + "/**").hasAuthority(WRITE_AUTHORITY);
+                .antMatchers(HttpConstants.REST_API_BASE_URL + "/test").permitAll()
+                .antMatchers(HttpConstants.REST_API_FILE_ENDPOINT + "/**").hasAuthority(WRITE_AUTHORITY);
     }
 
     @Override
