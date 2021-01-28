@@ -38,14 +38,11 @@ public class DefaultDatabasePresenter implements DatabasePresenter{
 
     @Override
     public void create_database() {
-        System.out.println("hello");
-
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "pmgd", "pmgd");
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE DATABASE users");
-            System.out.println("got it");
         } catch (Exception e) {
             System.err.println(e);
         }
