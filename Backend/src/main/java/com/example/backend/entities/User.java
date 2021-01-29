@@ -43,10 +43,4 @@ public class User {
     public void getPassword(String password) {
         this.password = password;
     }
-
-//    @Override
-//    public String toString() {
-//        return "users [user=" + username + ", password=" + password +"]";
-//    }
-
 }
