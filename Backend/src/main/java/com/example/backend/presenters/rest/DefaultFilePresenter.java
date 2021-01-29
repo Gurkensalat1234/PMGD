@@ -1,12 +1,16 @@
 package com.example.backend.presenters.rest;
 
+import com.example.backend.annotations.LogMethodCall;
+import com.example.backend.repositories.UserRepository;
 import com.example.backend.services.FileService;
+import io.swagger.annotations.ApiParam;
 import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 import org.apache.tomcat.util.http.fileupload.FileItemStream;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
@@ -18,7 +22,8 @@ import java.io.InputStream;
 public class DefaultFilePresenter implements FilePresenter {
 
 
-    private final FileService fileService;
+    private FileService fileService;
+
 
     @Autowired
     public DefaultFilePresenter(FileService fileService) {
@@ -56,7 +61,10 @@ public class DefaultFilePresenter implements FilePresenter {
     }
 
     @Override
-    public ResponseEntity<StreamingResponseBody> get(String fileId) {
+    @LogMethodCall
+    public ResponseEntity<StreamingResponseBody> get(
+            @PathVariable
+            @ApiParam(required = true, value = "Get file with the supplied fileId") String fileId) {
         return null;
     }
 

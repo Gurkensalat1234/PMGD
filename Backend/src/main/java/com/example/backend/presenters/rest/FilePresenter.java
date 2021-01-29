@@ -1,6 +1,8 @@
 package com.example.backend.presenters.rest;
 
 import com.example.backend.general.HttpConstants;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +19,6 @@ public interface FilePresenter {
 
     @PostMapping(
             value = "/upload",
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<String> upload(HttpServletRequest httpServletRequest) throws IOException;

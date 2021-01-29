@@ -1,8 +1,12 @@
 package com.example.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.persistence.*;
 
@@ -11,36 +15,26 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
+@Data
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String username;
-    private String password;
-    boolean isEnabled;
 
-    //public User() {}
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @ApiModelProperty()
+    @JsonIgnore
+    private long id;
 
     @Column(name = "username", nullable = false)
-    public String getUser() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @ApiModelProperty(value = "Benutzername", example = "retfloww")
+    private String username;
 
     @Column(name = "password", nullable = false)
-    public String getPassword() {
-        return password;
-    }
+    @ApiModelProperty(value = "Passwort vom Benutzer", example = "retfloww")
+    private String password;
 
-    public void getPassword(String password) {
-        this.password = password;
-    }
+    @Column(name = "is_enabled")
+    @ApiModelProperty(value = "Gibt an ob der Benutzer gesperrt ist", example = "false")
+    boolean isEnabled;
+
 }
